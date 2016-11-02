@@ -7,7 +7,7 @@ describe 'user can search for nearby stores' do
       fill_in 'zipcode', with: '80202'
       click_on 'Search'
 
-      expect(current_path).to eq('/search?zipcode=80202')
+      expect(current_path).to eq('/search')
       expect(page).to have_content('Stores within 25 miles of 80202')
       expect(page).to have_content('17 Total Stores')
       within('.results') do
