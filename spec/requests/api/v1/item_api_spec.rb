@@ -51,12 +51,31 @@ describe 'item api' do
 
     expect(Item.count).to eq(0)
   end
-end
 
-# When I send a DELETE request to /api/v1/items/1 I receive a 204 JSON
-# response if the record is successfully deleted
-#
-# When I send a POST request to /api/v1/items with a name, description, and
-# image_url I receive a 201 JSON response if the record is successfully created
-# And I receive a JSON response containing the id, name, description, and
-# image_url but not the created_at or updated_at
+  it 'returns error if item to be deleted is not found' do
+    item = Item.create(name: 'test1',
+                description: 'Test descrip',
+                image_url: 'test.com')
+
+    expect(Item.count).to eq(1)
+
+    delete "/api/v1/items/123456"
+
+    expect(Item.count).to eq(1)
+    expect(response.status).to eq(404)
+  end
+
+  it 'creates a new item' do
+    post '/api/v1/items', {
+      name: 'test1',
+      description: 'Test descrip',
+      image_url: 'test.com'
+    }
+
+    expect(response.status).to eq(200)
+    expect(Item.count).to eq(1)
+    expect(Item.first.name).to eq('test1')
+    expect(Item.first.description).to eq('Test descrip')
+    expect(Item.first.image_url).to eq('test.com')
+  end
+end
