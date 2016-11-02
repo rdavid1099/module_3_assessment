@@ -19,7 +19,7 @@ group :development do
 end
 
 group :development, :test do
-  gem "pry-rails", :require => "pry"
+  gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara'
   gem 'launchy'
