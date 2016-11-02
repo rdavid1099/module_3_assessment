@@ -1,6 +1,6 @@
 <h1>Stores within 25 miles of <%= @zipcode %></h1>
 <h3><%= @stores.count %> Total Stores</h3>
-<table class='results'>
+<table class='results table table-hover'>
   <tr>
     <th>
       Store Name
@@ -21,19 +21,19 @@
   <% @stores.each do |store| %>
     <tr>
       <td>
-        <%= store[:longName] %>
+        <%= store.long_name %>
       </td>
       <td>
-        <%= store[:city] %>
+        <%= store.city %>
       </td>
       <td>
-        <%= store[:distance] %>
+        <%= store.distance %>
       </td>
       <td>
-        <%= store[:phone] %>
+        <%= store.phone %>
       </td>
       <td>
-        <%= store[:storeType] %>
+        <%= store.store_type %>
       </td>
     </tr>
   <% end %>
