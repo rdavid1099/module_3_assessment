@@ -1,13 +1,12 @@
 class Api::V1::ItemsController < ApplicationController
   before_action :set_item, only: [:show, :create, :destroy]
   def index
-    items = Item.all
-    render json: items
+    @items = Item.all
   end
 
   def show
     if @item
-      render json: @item
+      @item
     else
       item_not_found
     end
@@ -25,9 +24,9 @@ class Api::V1::ItemsController < ApplicationController
   end
 
   def create
-    item = Item.new(item_params)
-    if item.save
-      render json: item
+    @item = Item.new(item_params)
+    if @item.save
+      @item
     else
       render status: 404, json: {
         message: "Item not successfully saved",

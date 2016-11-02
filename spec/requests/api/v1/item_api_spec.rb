@@ -6,13 +6,15 @@ describe 'item api' do
                 description: 'Test descrip',
                 image_url: 'test.com')
     Item.create(name: 'test2')
-    get '/api/v1/items'
+    get '/api/v1/items.json'
     result = JSON.parse(response.body, symbolize_names: true)
 
     expect(result.count).to eq(2)
     expect(result.first[:name]).to eq('test1')
     expect(result.first[:description]).to eq('Test descrip')
     expect(result.first[:image_url]).to eq('test.com')
+    expect(result.first[:created_at]).to eq(nil)
+    expect(result.first[:updated_at]).to eq(nil)
     expect(result.last[:name]).to eq('test2')
   end
 
@@ -21,7 +23,7 @@ describe 'item api' do
                 description: 'Test descrip',
                 image_url: 'test.com')
     Item.create(name: 'test2')
-    get "/api/v1/items/#{item.id}"
+    get "/api/v1/items/#{item.id}.json"
     result = JSON.parse(response.body, symbolize_names: true)
 
     expect(result[:name]).to eq('test1')
@@ -66,7 +68,7 @@ describe 'item api' do
   end
 
   it 'creates a new item' do
-    post '/api/v1/items', {
+    post '/api/v1/items.json', {
       name: 'test1',
       description: 'Test descrip',
       image_url: 'test.com'

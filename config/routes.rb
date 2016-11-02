@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get 'search', to: 'searches#index'
   namespace :api do
     namespace :v1 do
-      resources :items, only: [:index, :show, :create, :update, :destroy]
+      resources :items, only: [:index, :show, :create, :destroy]
     end
   end
   resources :items,  only: [:index, :show]
